@@ -9,9 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class AddressBookController {
 
+    private AddressBook model;
     private AddressBookRepository addressBookRepository;
     private BuddyRepository buddyRepository;
 
@@ -48,12 +52,21 @@ public class AddressBookController {
     }
 
     @PostMapping("/{name}/add")
-    public String addBuddy(@PathVariable String name, @ModelAttribute BuddyInfo buddy, Model model) {
+    public String addBuddy(@RequestParam(name="name")String name, @RequestParam(name="address")String address, @RequestParam(name="phonenumber")String phonenumber, @RequestParam(name="book")String book, Model response) {
 
-        AddressBook ab = addressBookRepository.findByName(name);
-        ab.addBuddy(buddy);
-        addressBookRepository.save(ab);
-        return displayBook(name, model);
+        model = addressBookRepository.findByName(book);
+        if (model == null) {
+            return "error";
+        }
+        else {
+            model.addBuddy(name,address,phonenumber);
+            response.addAttribute("buddy",model);
+            addressBookRepository.save(model);
+            List<BuddyInfo> result2 = new ArrayList<BuddyInfo>();
+            (buddyRepository.findAll()).forEach(result2::add);
+            response.addAttribute("b_list", result2);
+            return "getBuddy";
+        }
     }
 
     @DeleteMapping("/{name}/delete")
