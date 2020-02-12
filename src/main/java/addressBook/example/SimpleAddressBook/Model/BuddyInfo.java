@@ -13,6 +13,8 @@ public class BuddyInfo {
     private String address;
     private String number;
 
+    private AddressBook book;
+
     public BuddyInfo() {}
 
     public BuddyInfo(String name) {
