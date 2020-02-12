@@ -12,8 +12,7 @@ public class BuddyInfo {
     private String name;
     private String address;
     private String number;
-
-    private AddressBook book;
+    private String book;
 
     public BuddyInfo() {}
 
