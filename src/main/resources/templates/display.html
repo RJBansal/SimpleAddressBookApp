@@ -17,7 +17,7 @@
 <h1>Create Buddy</h1>
 <form action="#" th:action="@{/add}" th:object="${Buddy}" method="post">
 
-    <p>Book: <input type="text" th:field="*{book}" /></p>
+    <p>Book: <input type="text" name="addressbook" /></p>
     <p>Name: <input type="text" th:field="*{name}" /></p>
     <p>Address: <input type="text" th:field="*{address}" /></p>
     <p>Phone Number: <input type="text" th:field="*{number}" /></p>

@@ -52,7 +52,7 @@ public class AddressBookController {
     }
 
     @PostMapping("/{name}/add")
-    public String addBuddy(@RequestParam(name="name")String name, @RequestParam(name="address")String address, @RequestParam(name="phonenumber")String phonenumber, @RequestParam(name="book")String book, Model response) {
+    public String addBuddy(@RequestParam(name="name")String name, @RequestParam(name="address")String address, @RequestParam(name="phonenumber")String phonenumber, @RequestParam(name="addressbook")String book, Model response) {
 
         model = addressBookRepository.findByName(book);
         if (model == null) {
